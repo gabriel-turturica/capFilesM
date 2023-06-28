@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-    int fd; // open the file and get the file descriptor
+    int fd = ...; // open the file and get the file descriptor
 
     kj::FdInputStream fdStream(fd);
     kj::BufferedInputStreamWrapper bufferedStream(fdStream);
@@ -20,7 +20,7 @@ int main()
         capnp::PackedMessageReader message(bufferedStream, {100000000, 64});
 
         // get data reader
-        PlainData::Reader reader;
+        PlainData::Reader reader = ...;
 
         // get event list
         auto proEvent = reader.getEvents();
