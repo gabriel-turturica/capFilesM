@@ -68,7 +68,7 @@ static const uint16_t m_f8ff52779f55f192[] = {1, 0};
 static const uint16_t i_f8ff52779f55f192[] = {0, 1};
 const ::capnp::_::RawSchema s_f8ff52779f55f192 = {
   0xf8ff52779f55f192, b_f8ff52779f55f192.words, 52, d_f8ff52779f55f192, m_f8ff52779f55f192,
-  1, 2, i_f8ff52779f55f192, nullptr, nullptr, { &s_f8ff52779f55f192, nullptr, nullptr, 0, 0, nullptr }
+  1, 2, i_f8ff52779f55f192, nullptr, nullptr, { &s_f8ff52779f55f192, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !CAPNP_LITE
 static const ::capnp::_::AlignedData<79> b_d4108f0ff4656c1c = {
@@ -158,7 +158,7 @@ static const uint16_t m_d4108f0ff4656c1c[] = {0, 1, 2, 3};
 static const uint16_t i_d4108f0ff4656c1c[] = {0, 1, 2, 3};
 const ::capnp::_::RawSchema s_d4108f0ff4656c1c = {
   0xd4108f0ff4656c1c, b_d4108f0ff4656c1c.words, 79, nullptr, m_d4108f0ff4656c1c,
-  0, 4, i_d4108f0ff4656c1c, nullptr, nullptr, { &s_d4108f0ff4656c1c, nullptr, nullptr, 0, 0, nullptr }
+  0, 4, i_d4108f0ff4656c1c, nullptr, nullptr, { &s_d4108f0ff4656c1c, nullptr, nullptr, 0, 0, nullptr }, false
 };
 #endif  // !CAPNP_LITE
 }  // namespace schemas
@@ -168,19 +168,27 @@ const ::capnp::_::RawSchema s_d4108f0ff4656c1c = {
 
 
 // PlainData
+#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t PlainData::_capnpPrivate::dataWordSize;
 constexpr uint16_t PlainData::_capnpPrivate::pointerCount;
+#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !CAPNP_LITE
+#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind PlainData::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* PlainData::_capnpPrivate::schema;
+#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !CAPNP_LITE
 
 // PlainEvent
+#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr uint16_t PlainEvent::_capnpPrivate::dataWordSize;
 constexpr uint16_t PlainEvent::_capnpPrivate::pointerCount;
+#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
 #if !CAPNP_LITE
+#if CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
 constexpr ::capnp::Kind PlainEvent::_capnpPrivate::kind;
 constexpr ::capnp::_::RawSchema const* PlainEvent::_capnpPrivate::schema;
+#endif  // !CAPNP_NEED_REDUNDANT_CONSTEXPR_DECL
 #endif  // !CAPNP_LITE
 
 
