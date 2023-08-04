@@ -1,0 +1,71 @@
+Board 0:
+	Channel 0 has 9989 count 
+	Channel 1 has 14032 count 
+	Channel 2 has 14010 count 
+	Channel 3 has 16746 count 
+	Channel 4 has 15139 count 
+	Channel 5 has 21319 count 
+	Channel 6 has 19407 count 
+	Channel 7 has 19403 count 
+	Channel 8 has 19307 count 
+	Channel 9 has 19430 count 
+Board 1:
+	Channel 0 has 53836 count 
+	Channel 1 has 37332 count 
+	Channel 2 has 76668 count 
+	Channel 3 has 77124 count 
+	Channel 4 has 69525 count 
+	Channel 5 has 69323 count 
+	Channel 6 has 68930 count 
+	Channel 7 has 66686 count 
+	Channel 8 has 64177 count 
+	Channel 9 has 64623 count 
+Board 3:
+	Channel 0 has 33786 count (Error : detector was of -1 type)
+	Channel 1 has 31227 count (Error : detector was of -1 type)
+	Channel 2 has 29156 count (Error : detector was of -1 type)
+	Channel 3 has 28858 count (Error : detector was of -1 type)
+	Channel 4 has 32814 count (Error : detector was of -1 type)
+	Channel 5 has 32406 count 
+	Channel 6 has 30113 count 
+	Channel 7 has 26518 count 
+	Channel 8 has 27480 count 
+	Channel 9 has 26790 count 
+	Channel 10 has 31877 count (Error : detector was of -1 type)
+	Channel 11 has 30754 count (Error : detector was of -1 type)
+	Channel 12 has 29224 count (Error : detector was of -1 type)
+	Channel 13 has 31040 count (Error : detector was of -1 type)
+	Channel 14 has 32102 count (Error : detector was of -1 type)
+
+Further Channels did not count anything, being active : 
+Board 0, Channel12
+Board 0, Channel13
+Board 0, Channel14
+
+
+Board 2, Channel0
+Board 2, Channel1
+Board 2, Channel2
+Board 2, Channel3
+Board 2, Channel4
+Board 2, Channel5
+Board 2, Channel6
+Board 2, Channel7
+Board 2, Channel8
+Board 2, Channel9
+Board 2, Channel12
+Board 2, Channel13
+Board 2, Channel14
+
+
+Board 4, Channel0
+Board 4, Channel1
+Board 4, Channel2
+Board 4, Channel3
+Board 4, Channel4
+Board 4, Channel5
+Board 4, Channel6
+Board 4, Channel7
+Board 4, Channel8
+Board 4, Channel9
+
