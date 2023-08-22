@@ -17,7 +17,7 @@ using json = nlohmann::json;
 int main() {
 
     // test
-        ofstream out("data.out");
+    ofstream out("data.out");
     //
 
     ifstream config_file("config.json");
@@ -33,7 +33,7 @@ int main() {
     map<pair<int, int>, TH1I*> energyHistograms;
     map<pair<int, int>, TH1I*> timeDifferenceHistograms; // New map for time differences
     
-    uint64_t prevTimestamp = 0; // To store the timestamp of the previous event
+    map<pair<int, int>, uint64_t> prevTimestamps; // Map to store previous timestamps
 
     while (bufferedStream.tryGetReadBuffer() != nullptr) // while there is data to read
     {
@@ -69,38 +69,35 @@ int main() {
             TH1I* energyHist = energyHistograms[typeLutPair];
             energyHist->Fill(energy);
             
-            if (prevTimestamp != 0) {
-                // Calculate time difference and fill time difference histogram
+            if (prevTimestamps.find(typeLutPair) != prevTimestamps.end()) {
+                uint64_t prevTimestamp = prevTimestamps[typeLutPair];
                 uint64_t timeDifference = timestamp - prevTimestamp;
-                out << timeDifference << endl;
+
                 if (timeDifferenceHistograms.find(typeLutPair) == timeDifferenceHistograms.end()) {
                     TH1I* timeDiffHist = new TH1I(Form("TimeDiffHist_%d_%d", type, lut),
                                                   Form("Time Difference Histogram - Type %d, Lut %d", type, lut),
-                                                  1000, 0, 999);
+                                                  1000, 0, 0); // Adjust the range as needed
                     timeDifferenceHistograms[typeLutPair] = timeDiffHist;
                 }
+
                 TH1I* timeDiffHist = timeDifferenceHistograms[typeLutPair];
                 timeDiffHist->Fill(timeDifference);
             }
-            
-            prevTimestamp = timestamp; // Update the previous timestamp
+
+            prevTimestamps[typeLutPair] = timestamp; // Update the previous timestamp for this detector
         }
     }
 
-    TFile outputFile_energies("output_energies.root", "RECREATE");
+    TFile outputFile("output.root", "RECREATE");
     for (const auto& histPair : energyHistograms) {
         histPair.second->Write();
         delete histPair.second;
     }
-    outputFile_energies.Close();
-
-    TFile outputFile_timeDiffs("output_timeDiffs.root", "RECREATE");
     for (const auto& histPair : timeDifferenceHistograms) {
         histPair.second->Write();
         delete histPair.second;
     }
-    outputFile_timeDiffs.Close();
-
+    outputFile.Close();
     config_file.close(); out.close();
     return 0;
 }
