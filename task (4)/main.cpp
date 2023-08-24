@@ -31,6 +31,7 @@ int main() {
     kj::BufferedInputStreamWrapper bufferedStream(fdStream);
 
     map<pair<int, int>, TH2I*> energyTimeHistograms; // Two-dimensional histogram map
+    map<pair<int,int>, uint64_t> previousTimeStamps; //previous timestamp hashmap
     
     while (bufferedStream.tryGetReadBuffer() != nullptr) // while there is data to read
     {
@@ -54,17 +55,20 @@ int main() {
             
             pair<int, int> typeLutPair = make_pair(type, lut);
             
-            if (energyTimeHistograms.find(typeLutPair) == energyTimeHistograms.end()) {
-                // Create energy-time histogram
-                TH2I* hist = new TH2I(Form("EnergyTimeHist_%d_%d", type, lut),
-                                      Form("Energy-Time Histogram - Type %d, Lut %d", type, lut),
-                                      1000, 0, 0, 16384, 0, 16383);  // Time on x-axis, Energy on y-axis
-                energyTimeHistograms[typeLutPair] = hist;
+            if(previousTimeStamps.find(typeLutPair) != previousTimeStamps.end()) {
+
+                if (energyTimeHistograms.find(typeLutPair) == energyTimeHistograms.end()) {
+                    // Create energy-time histogram
+                    energyTimeHistograms[typeLutPair] = new TH2I(Form("TimeEnergyHist_%d_%d", type, lut),
+                                        Form("Energy-Time Histogram - Type %d, Lut %d", type, lut),
+                                        16384, 0, 16383, 1000, 0, 0);  // Time on x-axis, Energy on y-axis
+                }
+                
+                // Fill energy-time histogram
+                energyTimeHistograms[typeLutPair]->Fill(energy, timestamp - previousTimeStamps[typeLutPair]);
+
             }
-            
-            // Fill energy-time histogram
-            TH2I* energyTimeHist = energyTimeHistograms[typeLutPair];
-            energyTimeHist->Fill(timestamp, energy);
+            previousTimeStamps[typeLutPair] = timestamp;
         }
     }
 
