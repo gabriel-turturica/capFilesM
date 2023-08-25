@@ -1,0 +1,67 @@
+{
+  "build": {
+    "absoluteTime": {"resetGap": 5, "scalePower": -12}, 
+    "antiCoincFlag": [2], 
+    "coincMask": [ [0, 2, 0, 0, 0] ], 
+    "coincWindow": 1000, 
+    "sortBeforeBuild": true, 
+    "typePriority": [1, 0, 2, 3, 4]
+  }, 
+  "delay": {
+    "energyThreshold": 50, 
+    "histBins": 1000, 
+    "histRange": [0, 10000], 
+    "outFileName": "results", 
+    "refLUT": 5, 
+    "refTimeOffset": -1000, 
+    "refType": 1
+  }, 
+  "detector": {
+    "coincPairs": [
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0, 0, 0, 0, 0], 
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0, 0, 0, 0, 0], 
+      [0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0], 
+      [0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0]  
+    ], 
+    "delay": [
+      [ 675,  525,  515,  515,  505,  545, 565, 535, 555, 525,  0,  0,  0,   0,   0, 0], 
+      [  85,   65,   75,   85,   85,   75,  75,  75,  85,  85,  0,  0,  0,   0,   0, 0], 
+      [2145, 2125, 2135, 2115, 1995, 2075,   0,   0,   0,   0,  0,  0,  0,   0,   0, 0], 
+      [   0,    5,    5,    5,   -5,   -5,   5,   5,   5,   5, -5, -5, -5, -15, -15, 0]  
+    ], 
+    "lut": [
+      [0, 1, 2, 3, 4, 20, 21, 22, 23, 24, -1, -1, -1, -1, -1, -1], 
+      [0, 1, 2, 3, 4, 20, 21, 22, 23, 24, -1, -1, -1, -1, -1, -1], 
+      [0, 1, 2, 3, 4,  5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], 
+      [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, -1]  
+    ], 
+    "type": [
+      [0, 0, 0, 0, 0, 0,  0,  0,  0,  0, -1, -1, -1, -1, -1, -1], 
+      [2, 2, 2, 2, 2, 2,  2,  2,  2,  2, -1, -1, -1, -1, -1, -1], 
+      [3, 3, 3, 3, 3, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1], 
+      [1, 1, 1, 1, 1, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1, -1]  
+    ]
+  }, 
+  "gasp": {
+    "description": {
+      "detector"             : ["energy", "time/1000", "time%1000"]                                                       , 
+      "detectorRaw"          : ["energy", "time[23-8]", "time[7-0]"]                                                      , 
+      "noType"               : ["no types, defined for BGO mostly, which is not written in gasp"]                         , 
+      "psdDetector"          : ["energy", "time/1000", "time%1000", "psd"]                                                , 
+      "suppressedDetector"   : ["energy", "time/1000", "time%1000", "vetoEnergy", "vetoTime/1000", "vetoTime%1000"]       , 
+      "suppressedDetectorRaw": ["energy", "time[23-8]", "time[7-0]", "vetoEnergy", "vetoTime[23-8]", "vetoTime[7-0]"]     , 
+      "suppressedPsdDetector": ["energy", "time/1000", "time%1000", "psd", "vetoEnergy", "vetoTime/1000", "vetoTime%1000"]  
+    }, 
+    "typeOutputFormat": ["suppressedDetector", "detector", "noType", "detector"]
+  }, 
+  "general": {"configTimeUnit": "kilo", "maxCores": 8, "run": "build"}, 
+  "input": {
+    "eventCount": 0, 
+    "fileFormat": "cap", 
+    "fileIdentifier": "152Eu_walk_", 
+    "keepIndex": [1, 1000], 
+    "liveBuild": true, 
+    "path": "/Data/9Be_176Yb"
+  }, 
+  "output": {"fileFormat": "gasp", "path": "/Data/9Be_176Yb/gaspBuild"}
+}
