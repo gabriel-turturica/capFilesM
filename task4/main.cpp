@@ -10,25 +10,25 @@
 #include "json.hpp"
 #include <TH2I.h>
 #include <TFile.h>
+#include <TApplication.h>
+#include <TCanvas.h>
 
 using namespace std;
 using json = nlohmann::json;
 
 int main() {
 
-    // test
-    ofstream out("data.out");
-    //
-
     ifstream config_file("config.json");
     json config = json::parse(config_file); // parsing the config file
     json detector_types = config["detector"]["type"]; // getting the detector types
     json detector_luts = config["detector"]["lut"]; // getting the detector luts
+    config_file.close();
     
     int fd = open("data.cap", O_RDONLY); // open the file and get the file descriptor
 
     kj::FdInputStream fdStream(fd);
     kj::BufferedInputStreamWrapper bufferedStream(fdStream);
+    
     map<pair<int, int>, TH1I*> energyHistograms;
     map<pair<int, int>, TH1I*> timeDifferenceHistograms;
     map<pair<int, int>, TH2I*> energyTimeHistograms; // Two-dimensional histogram map
@@ -71,7 +71,7 @@ int main() {
                 if (energyTimeHistograms.find(typeLutPair) == energyTimeHistograms.end()) {
                     // Create energy-time histogram
                     energyTimeHistograms[typeLutPair] = new TH2I(Form("TimeEnergyHist_%d_%d", type, lut),
-                                        Form("Energy-Time Histogram - Type %d, Lut %d", type, lut),
+                                        Form("Time-Energy Histogram - Type %d, Lut %d", type, lut),
                                         16384, 0, 16383, 500, 0, 0);  // Time on y-axis, Energy on x-axis
                 }
                 
@@ -102,11 +102,13 @@ int main() {
         delete histPair.second;
     }
     for (const auto& histPair : energyTimeHistograms) {
-        histPair.second->Draw("COLZ"); //Colors the histogram before displaying it
+        histPair.second->Draw("colz"); //Colors the histogram before displaying it
         histPair.second->Write();
         delete histPair.second;
     }
     outputFile.Close();
-    config_file.close(); out.close();
+    
+
+    
     return 0;
 }
