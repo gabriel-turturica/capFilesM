@@ -72,24 +72,25 @@ int main() {
                     // Create energy-time histogram
                     energyTimeHistograms[typeLutPair] = new TH2I(Form("TimeEnergyHist_%d_%d", type, lut),
                                         Form("Time-Energy Histogram - Type %d, Lut %d", type, lut),
-                                        16384, 0, 16383, 500, 0, 0);  // Time on y-axis, Energy on x-axis
+                                        500, 0, 0, 500, 0, 0);  // Time on y-axis, Energy on x-axis
                 }
                 
                 // Fill energy-time histogram
                 energyTimeHistograms[typeLutPair]->Fill(energy, timestamp - previousTimeStamps[typeLutPair]);
-
+            }
+            if(previousTimeStamps.find(typeLutPair) != previousTimeStamps.end()) {
                 if(timeDifferenceHistograms.find(typeLutPair) == timeDifferenceHistograms.end()) {
                     //Create time difference histogram
                     timeDifferenceHistograms[typeLutPair] = new TH1I(Form("TimeDiffHist_%d_%d", type, lut),
                                             Form("Time Difference Histogram - Type %d Lut %d", type, lut),
                                             1000, 0 , 0);
                 }
-
                 //Fill it
                 timeDifferenceHistograms[typeLutPair]->Fill(timestamp - previousTimeStamps[typeLutPair]);
             }
             previousTimeStamps[typeLutPair] = timestamp;
         }
+        
     }
 
     TFile outputFile("output.root", "RECREATE");
@@ -102,9 +103,21 @@ int main() {
         delete histPair.second;
     }
     for (const auto& histPair : energyTimeHistograms) {
+
         histPair.second->Draw("colz"); //Colors the histogram before displaying it
         histPair.second->Write();
+        
+        // extracting and drawing the projections
+        int type = histPair.first.first;
+        int lut = histPair.first.second;
+        TH1D * projection = histPair.second->ProjectionX(Form("Projection on X type %d, lut %d", type, lut), 500, 0, 0);
+        projection->Write();
+        projection = histPair.second->ProjectionY(Form("Projection on Y type %d, lut %d", type, lut), 500, 0, 0);
+        projection->Write();
+        
         delete histPair.second;
+        
+
     }
     outputFile.Close();
     
