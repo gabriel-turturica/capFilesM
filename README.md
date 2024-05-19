@@ -2,7 +2,7 @@ The tasks for task1 are in the task1/README.md
 
 Update : Below is a summary of the three tasks:
 
-The first task requires reading data.cap, some code was already added to main.cpp. Use the Makefile to compile the code.
+The first task requires reading data.cap.
 
 Task 1:
 
